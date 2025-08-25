@@ -14,13 +14,12 @@
   orcid: "",
   accent-color: "#000000",
   font: "New Computer Modern",
-  paper: "us-letter",
+  paper: "a4",
   author-font-size: 20pt,
   font-size: 10pt,
   lang: "en",
   body,
 ) = {
-
   // Sets document metadata
   set document(author: author, title: author)
 
@@ -31,17 +30,18 @@
     size: font-size,
     lang: lang,
     // Disable ligatures so ATS systems do not get confused when parsing fonts.
-    ligatures: false
+    ligatures: false,
   )
 
   // Reccomended to have 0.5in margin on all sides
   set page(
-    margin: (0.5in),
+    margin: 0.5in,
     paper: paper,
   )
 
   // Link styles
-  show link: underline
+  // Turned off
+  // show link: underline
 
 
   // Small caps for section titles
@@ -66,7 +66,7 @@
       weight: 700,
       size: author-font-size,
     )
-    #pad(it.body)
+    #pad([#smallcaps(it.body)])
   ]
 
   // Level 1 Heading
@@ -96,7 +96,11 @@
           contact-item(github, link-type: "https://"),
           contact-item(linkedin, link-type: "https://"),
           contact-item(personal-site, link-type: "https://"),
-          contact-item(orcid, prefix: [#orcid-icon(color: rgb("#AECD54"))orcid.org/], link-type: "https://orcid.org/"),
+          contact-item(
+            orcid,
+            prefix: [#orcid-icon(color: rgb("#AECD54"))orcid.org/],
+            link-type: "https://orcid.org/",
+          ),
         )
         items.filter(x => x != none).join("  |  ")
       }
@@ -144,6 +148,24 @@
   }
 }
 
+// Allows joining of multiple GitHub links to projects
+#let joined_urls(
+  urls: (),
+) = {
+  if urls.len() == 0 {
+    []
+  } else if urls.len() == 1 {
+    [#link("https://" + urls.first())[github]]
+  } else {
+    urls
+      .enumerate(start: 1)
+      .map(num_url => [#link(
+        "https://" + num_url.last(),
+      )[github#num_url.first()]])
+      .join("  |  ")
+  }
+}
+
 // Section components below
 #let edu(
   institution: "",
@@ -187,6 +209,25 @@
   )
 }
 
+#let work-project(
+  role: "",
+  title: "",
+  dates: "",
+  coauthor: "",
+  urls: (),
+) = {
+  generic-two-by-two(
+    top-left: if urls.len() != 0 {
+      [*#role*#"  |  "#joined_urls(urls: urls)]
+    } else {
+      [*#role*]
+    },
+    top-right: dates,
+    bottom-left: emph(title),
+    bottom-right: coauthor,
+  )
+}
+
 #let project(
   role: "",
   name: "",
@@ -198,7 +239,7 @@
       if role == "" {
         [*#name* #if url != "" and dates != "" [ (#link("https://" + url)[#url])]]
       } else {
-        [*#role*, #name #if url != "" and dates != ""  [ (#link("https://" + url)[#url])]]
+        [*#role*, #name #if url != "" and dates != "" [ (#link("https://" + url)[#url])]]
       }
     },
     right: {
