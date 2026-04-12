@@ -1,10 +1,10 @@
 [package]
-name = "resume-for-reseachers"
+name = "resume-for-researchers"
 version = "0.1.0"
 entrypoint = "src/lib.typ"
-authors = ["Ryan Reese <https://github.com/Ryan-Reese"]
+authors = ["Ryan Reese <https://github.com/Ryan-Reese>"]
 license = "MIT"
-description = "Made for reseachers; Written with Typst"
+description = "Made for researchers; Written with Typst"
 repository = "https://github.com/Ryan-Reese/typst-resume-template"
 keywords = ["cv", "resume", "research"]
 categories = ["cv"]

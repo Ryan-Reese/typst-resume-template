@@ -1,0 +1,16 @@
+# Compiled output
+*.pdf
+
+# macOS
+.DS_Store
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Typst test output
+tests/**/out/
+tests/**/diff/
