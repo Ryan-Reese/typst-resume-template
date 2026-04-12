@@ -19,7 +19,16 @@ just install        # installs to @local
 just uninstall      # removes from @local
 ```
 
-Note: `just` and `typst-test` are not currently installed. Justfile commands can be run manually.
+Note: `just` is installed but `typst-test` is not currently available. The `scripts/package` script requires Bash 4+ (`readarray`); macOS ships Bash 3.2, so manual installation is needed (see below).
+
+### Manual local install (macOS)
+
+```bash
+PKG_DIR="$HOME/Library/Application Support/typst/packages/local/resume-for-researchers/0.1.0"
+mkdir -p "$PKG_DIR/src"
+cp src/lib.typ src/resume.typ "$PKG_DIR/src/"
+cp typst.toml LICENSE "$PKG_DIR/"
+```
 
 ## Architecture
 
@@ -27,20 +36,19 @@ Note: `just` and `typst-test` are not currently installed. Justfile commands can
 src/lib.typ          # Package entrypoint (re-exports resume.typ)
 src/resume.typ       # All template logic: resume(), edu(), work(), project(), etc.
 template/main.typ    # Example resume (uses @preview import)
-typst.toml           # Package metadata (name: resume-for-reseachers, v0.1.0)
+typst.toml           # Package metadata (name: resume-for-researchers, v0.1.0)
 scripts/             # package, setup, uninstall scripts
-docs/manual.typ      # Manual source
+docs/manual.typ      # Manual source (currently empty)
 tests/               # Test suite (uses typst-test)
 ```
 
 ## Gotchas
 
-- **Local dev imports**: Use `#import "src/lib.typ": *` for local testing, NOT the `@preview/resume-for-reseachers:0.1.0` import (that's for published packages)
-- **No .gitignore**: Repo lacks a `.gitignore` — be careful not to commit build artifacts or `.env` files
+- **Local dev imports**: Use `#import "src/lib.typ": *` for local testing, NOT the `@preview/resume-for-researchers:0.1.0` import (that's for published packages)
 - **Ligatures disabled**: Intentional for ATS compatibility — do not re-enable
-- **Package name typo**: `resume-for-reseachers` (missing 'r') is the published name — do not "fix" it without a coordinated version bump
+- **Release workflow**: `release.yml` pushes to `Ryan-Reese/typst-packages` — you need a fork of `typst/packages` at that path with a `REGISTRY_TOKEN` secret configured
 
 ## Custom Components (not in upstream)
 
 - `work-project()` — work projects with role, title, dates, coauthor, and multiple URLs
-- `joined_urls()` — renders numbered GitHub links ("github1 | github2")
+- `joined-urls()` — renders numbered GitHub links ("github1 | github2")

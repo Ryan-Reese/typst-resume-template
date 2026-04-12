@@ -33,7 +33,7 @@
     ligatures: false,
   )
 
-  // Reccomended to have 0.5in margin on all sides
+  // Recommended to have 0.5in margin on all sides
   set page(
     margin: 0.5in,
     paper: paper,
@@ -45,10 +45,10 @@
 
 
   // Small caps for section titles
-  show heading.where(level: 2): it => [
-    #pad(top: 0pt, bottom: -10pt, [#smallcaps(it.body)])
-    #line(length: 100%, stroke: 1pt)
-  ]
+  show heading.where(level: 2): it => {
+    pad(top: 0pt, bottom: -10pt, smallcaps(it.body))
+    line(length: 100%, stroke: 1pt)
+  }
 
   // Accent Color Styling
   show heading: set text(
@@ -60,14 +60,14 @@
   )
 
   // Name will be aligned left, bold and big
-  show heading.where(level: 1): it => [
-    #set align(author-position)
-    #set text(
+  show heading.where(level: 1): it => {
+    set align(author-position)
+    set text(
       weight: 700,
       size: author-font-size,
     )
-    #pad([#smallcaps(it.body)])
-  ]
+    pad(smallcaps(it.body))
+  }
 
   // Level 1 Heading
   [= #(author)]
@@ -76,7 +76,7 @@
   let contact-item(value, prefix: "", link-type: "") = {
     if value != "" {
       if link-type != "" {
-        link(link-type + value)[#(prefix + value)]
+        link(link-type + value)[#prefix#value]
       } else {
         value
       }
@@ -144,12 +144,12 @@
   if start-date == "" {
     end-date
   } else {
-    start-date + " " + sym.dash.em + " " + end-date
+    [#start-date #sym.dash.em #end-date]
   }
 }
 
 // Allows joining of multiple GitHub links to projects
-#let joined_urls(
+#let joined-urls(
   urls: (),
 ) = {
   if urls.len() == 0 {
@@ -171,7 +171,6 @@
   institution: "",
   dates: "",
   degree: "",
-  gpa: "",
   location: "",
   // Makes dates on upper right like rest of components
   consistent: false,
@@ -218,7 +217,7 @@
 ) = {
   generic-two-by-two(
     top-left: if urls.len() != 0 {
-      [*#role*#"  |  "#joined_urls(urls: urls)]
+      [*#role*#"  |  "#joined-urls(urls: urls)]
     } else {
       [*#role*]
     },
