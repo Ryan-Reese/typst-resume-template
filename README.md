@@ -1,12 +1,12 @@
 # Resume for Researchers
 
-<div align="center">Version 0.1.0</div>
+<div align="center">*Version 0.1.0*</div>
 
-A Typst resume template designed for researchers and academics. It provides ATS-compatible formatting with components tailored for research projects, co-authorships, and multiple repository links. Defaults to A4 paper and uses New Computer Modern with ligatures disabled for maximum ATS compatibility. Inspiration is taken from [Jake's Resume](https://github.com/jakegut/resume), [guided-resume-starter-cgc](https://typst.app/universe/package/guided-resume-starter-cgc/), and [stuxf/basic-typst-resume-template](https://github.com/stuxf/basic-typst-resume-template).
+A Typst resume template designed for researchers and academics. It provides ATS-compatible formatting with components tailored for research projects, co-authorships, and multiple repository links. Defaults to A4 paper and uses New Computer Modern with ligatures disabled for maximum ATS compatibility. Inspiration is taken from [Jake's Resume](https://github.com/jakegut/resume), [guided-resume-starter-cgc](https://typst.app/universe/package/guided-resume-starter-cgc/), and crucially, [stuxf's resume template](https://github.com/stuxf/basic-typst-resume-template) on Typst Universe.
 
 ## Sample Resume
 
-![example resume](https://raw.githubusercontent.com/Ryan-Reese/typst-resume-template/main/output/example-resume.png)
+![example resume](https://raw.githubusercontent.com/Ryan-Reese/typst-resume-template/main/thumbnail.png)
 
 ## Quick Start
 

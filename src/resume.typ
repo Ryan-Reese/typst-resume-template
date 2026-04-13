@@ -43,7 +43,6 @@
   // Turned off
   // show link: underline
 
-
   // Small caps for section titles
   show heading.where(level: 2): it => {
     pad(top: 0pt, bottom: -10pt, smallcaps(it.body))

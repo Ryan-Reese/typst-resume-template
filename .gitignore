@@ -2,8 +2,7 @@
 *.pdf
 
 # Personal resume output (contains personal information)
-output/*
-!output/example-resume.png
+output/
 
 # macOS
 .DS_Store
