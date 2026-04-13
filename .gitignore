@@ -1,6 +1,10 @@
 # Compiled output
 *.pdf
 
+# Personal resume output (contains personal information)
+output/*
+!output/example-resume.png
+
 # macOS
 .DS_Store
 
